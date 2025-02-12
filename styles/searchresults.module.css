@@ -1,0 +1,28 @@
+.container {
+    padding: 20px;
+  }
+  
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .jobCard {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .errorText {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .button {
+    margin-top: 10px;
+  }
+  

@@ -1,0 +1,24 @@
+* {
+  margin-top: 0;
+  padding-top: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  color: #3498db;  /* Default link color */
+  text-decoration: none;  /* Remove the underline */
+}
+
+a:hover {
+  color: #2c3e50;  /* Hover color */
+}

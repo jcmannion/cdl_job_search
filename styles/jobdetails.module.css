@@ -1,0 +1,30 @@
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .company {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .errorText {
+    color: red;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
