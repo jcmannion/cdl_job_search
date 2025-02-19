@@ -12,6 +12,6 @@ model Job {
   title       String
    location     String
   license      String
-  endorsements String[]
+  endorsements String
   travel       String
 }
