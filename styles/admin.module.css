@@ -1,92 +1,131 @@
 .container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .label {
-    font-size: 18px;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-  }
-  
-  .picker {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .checkbox-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .checkbox-item {
-    display: flex;
-    align-items: center;
-  }
-  
-  .checkbox {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    margin-left: 5px;
-    background-color: white;
-    cursor: pointer;
-  }
-  
-  .checkbox.selected {
-    background-color: #4CAF50; /* Green for selected */
-    border-color: #4CAF50;    /* Matching border color */
-  }
-  
-  .checkbox-text {
-    font-size: 16px;
-  }
-  
-  .job-list {
-    margin-top: 20px;
-  }
-  
-  .job-item {
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-  
-  .job-title {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .job-details {
-    font-size: 16px;
-    margin-bottom: 4px;
-  }
-  
-  .remove-button {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: red;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .remove-button:hover {
-    background-color: #e60000;
-  }
-  
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.label {
+  font-size: 18px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input {
+  border-width: 1px;
+  border-color: black;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.pickerContainer {
+  border-width: 1px;
+  border-color: #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.picker {
+  height: 40px;
+}
+
+.checkboxContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.checkboxItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border-width: 1px;
+  border-color: #ccc;
+  margin-left: 5px;
+  background-color: #fff;
+}
+
+.checkbox.selected {
+  background-color: #4CAF50;
+}
+
+.checkboxText {
+  font-size: 16px;
+}
+
+.jobList {
+  margin-top: 20px;
+}
+
+.jobItem {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-width: 1px;
+  border-color: #ddd;
+  border-radius: 8px;
+}
+
+.jobTitle {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.jobDetails {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.addJobButton {
+  display: block;
+  width: 100%;               
+  padding: 10px;             
+  background-color: blue;    
+  color: white;              
+  text-align: center;       
+  border: none;              
+  border-radius: 5px;        
+  font-size: 16px;          
+  margin-top: 10px;          
+  cursor: pointer;           
+  text-decoration: none;    
+}
+
+.addJobButton:hover {
+  background-color: darkblue; 
+}
+
+.removeButton {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: red;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;                                  
+  border: none;                   
+  font-size: 16px;                       
+  text-decoration: none;    
+}
+
+.removeButton:hover {
+  background-color: darkred;
+}
+
+.removeButtonText {
+  color: white;
+  font-weight: bold;
+}
