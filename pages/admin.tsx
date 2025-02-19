@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from '../styles/admin.module.css'; // Import your styles
+import styles from '../styles/admin.module.css'; 
 
 interface Job {
   id: number;
@@ -22,17 +22,15 @@ const AdminPage: React.FC = () => {
   const licenseOptions = ["Pick License Class", "Class A", "Class B", "Class C"];
   const endorsementOptions = ["N", "H", "X", "T", "P", "S"];
 
-  // Fetch all jobs from the server
   const fetchJobs = async () => {
     try {
-      const response = await axios.get<Job[]>('/api/jobs'); // Specify the response type as Job[]
+      const response = await axios.get<Job[]>('/api/jobs'); 
       setJobs(response.data); 
     } catch (error) {
       console.error('Error fetching jobs:', error);
     }
   };
 
-  // Add a new job
   const handleAddJob = async () => {
     try {
       const response = await axios.post('/api/jobs/create', {
@@ -54,18 +52,15 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  // Remove a job by ID
   const handleRemoveJob = async (id: number) => {
     try {
       const response = await axios.delete(`/api/jobs/${id}`);
-      console.log('Job removed successfully!', response.data);
-      fetchJobs(); // Refresh the list of jobs after removing a job
+      fetchJobs(); 
     } catch (error) {
       console.error('Error removing job:', error);
     }
   };
 
-  // Handle checkbox changes for endorsements
   const handleEndorsementChange = (endorsement: string) => {
     setEndorsements((prevEndorsements) => {
       if (prevEndorsements.includes(endorsement)) {
@@ -76,7 +71,6 @@ const AdminPage: React.FC = () => {
     });
   };
 
-  // Fetch jobs when the component mounts
   useEffect(() => {
     fetchJobs();
   }, []);
@@ -123,7 +117,6 @@ const AdminPage: React.FC = () => {
               className={`${styles.checkbox} ${endorsements.includes(endorsement) ? styles.selected : ''}`}
               onClick={() => handleEndorsementChange(endorsement)}
             >
-              {/* Use a button as the checkbox */}
             </button>
           </div>
         ))}
@@ -138,9 +131,8 @@ const AdminPage: React.FC = () => {
         placeholder="Enter travel willingness" 
       />
 
-      <button onClick={handleAddJob}>Add Job</button>
+      <button onClick={handleAddJob} className={styles.addJobButton}>Add Job</button>
       
-      {/* List all jobs with a remove button */}
       {jobs.length > 0 && (
         <div className={styles.jobList}>
           {jobs.map((job) => (

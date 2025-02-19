@@ -1,28 +1,50 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../prisma/client'; 
+import prisma from '../../../prisma/client';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query;  // Get the job ID from the query
+  try {
 
-  if (req.method === 'DELETE') {
-    if (!id) {
-      return res.status(400).json({ error: 'Job ID is required' });
-    }
+    const { id } = req.query;
+    console.log('Request method:', req.method); 
+    console.log('Request query:', req.query); 
 
-    try {
-      // Convert id to a number
-      const jobId = Array.isArray(id) ? id[0] : id;  // Ensure it's a single value
-      const deletedJob = await prisma.job.delete({
+    if (req.method === 'GET') {
+      if (!id) {
+        return res.status(400).json({ error: 'Job ID is required' });
+      }
+
+      const jobId = Array.isArray(id) ? id[0] : id;
+
+      const job = await prisma.job.findUnique({
         where: {
-          id: Number(jobId), // Convert the ID to a number
+          id: Number(jobId),
         },
       });
+
+      if (!job) {
+        return res.status(404).json({ error: 'Job not found' });
+      }
+
+      res.status(200).json(job);
+    } else if (req.method === 'DELETE') {
+      if (!id) {
+        return res.status(400).json({ error: 'Job ID is required' });
+      }
+
+      const jobId = Array.isArray(id) ? id[0] : id;
+
+      const deletedJob = await prisma.job.delete({
+        where: {
+          id: Number(jobId),
+        },
+      });
+
       res.status(200).json(deletedJob);
-    } catch (error) {
-      console.error('Error deleting job:', error);  // Log the error for debugging
-      res.status(500).json({ error: 'Error deleting job' });
+    } else {
+      res.status(405).json({ error: 'Method not allowed' });
     }
-  } else {
-    res.status(405).json({ error: 'Method not allowed' });
+  } catch (error) {
+    console.error('Error in API route:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 }

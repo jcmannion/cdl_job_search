@@ -11,12 +11,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const filteredJobs = allJobs.filter((job) => {
       let match = true;
 
-      // Apply filters based on location, license, and travel
       if (location && job.location !== location) match = false;
       if (license && job.license !== license) match = false;
       if (travel && job.travel !== travel) match = false;
 
-      // Filter jobs based on endorsements
       if (endorsements) {
         const selectedEndorsements = Array.isArray(endorsements)
           ? endorsements

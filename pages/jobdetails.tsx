@@ -1,42 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router'; 
-import axios from 'axios'; 
-import styles from '../styles/jobdetails.module.css'; 
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import styles from '../styles/jobdetails.module.css';
 
 interface Job {
   id: number;
   title: string;
-  company: string;
   location: string;
   license: string;
-  description: string;
+  endorsements: string | string[];
+  travel: string;
 }
 
 const JobDetailsPage: React.FC = () => {
   const router = useRouter();
-  const { jobId } = router.query; 
-  const [job, setJob] = useState<Job | null>(null); 
-  const [loading, setLoading] = useState<boolean>(true); 
-  const [error, setError] = useState<string | null>(null); 
+  const { id } = router.query; 
+  
+  const [job, setJob] = useState<Job | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (jobId) {
+    if (id) {
       const fetchJobDetails = async () => {
         try {
-
-          const response = await axios.get<Job>(`http://localhost:5000/api/jobs/${jobId}`);
-          setJob(response.data); 
+          const response = await axios.get<Job>(`/api/jobs/${id}`);
+          setJob(response.data);
         } catch (err) {
-          console.error("Error fetching job details:", err);
           setError('Error fetching job details: ' + (err instanceof Error ? err.message : 'Unknown error'));
         } finally {
           setLoading(false);
         }
       };
 
-      fetchJobDetails(); 
+      fetchJobDetails();
     }
-  }, [jobId]); 
+  }, [id]); 
 
   if (loading) {
     return (
@@ -65,10 +64,10 @@ const JobDetailsPage: React.FC = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{job.title}</h1>
-      <p className={styles.company}>{job.company}</p>
-      <p>{job.location}</p>
-      <p>License: {job.license}</p>
-      <p>Description: {job.description}</p>
+      <p className={styles.location}>{job.location}</p>
+      <p className={styles.license}>License: {job.license}</p>
+      <p className={styles.endorsements}>Endorsements: {Array.isArray(job.endorsements) ? job.endorsements.join(', ') : job.endorsements}</p>
+      <p className={styles.travel}>Travel: {job.travel}</p>
     </div>
   );
 };

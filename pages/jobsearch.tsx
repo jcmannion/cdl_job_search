@@ -21,8 +21,6 @@ const JobSearchPage: React.FC = () => {
     const queryString = new URLSearchParams(searchParams).toString();
 
     router.push(`/searchresults?${queryString}`);
-
-    console.log("Navigating to search results with params:", searchParams);
   };
 
   return (

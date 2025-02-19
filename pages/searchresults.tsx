@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import axios from 'axios';
 import styles from '../styles/searchresults.module.css';
 
@@ -25,7 +26,6 @@ const SearchResultsPage: React.FC = () => {
       try {
         setLoading(true);
 
-        // Prepare query parameters
         const queryParams: any = {};
 
         if (location) queryParams.location = location;
@@ -33,15 +33,10 @@ const SearchResultsPage: React.FC = () => {
         if (travel) queryParams.travel = travel;
         if (endorsement) queryParams.endorsements = endorsement;  
 
-        console.log('Sending query params:', queryParams);
-
-        // Fetch the data from the server
         const response = await axios.get<Job[]>('/api/jobs/search', { params: queryParams });
-        console.log('Response from API:', response.data);
 
         setFilteredJobs(response.data);
       } catch (err) {
-        console.error('Error fetching jobs:', err);
         setError('Error fetching jobs: ' + (err instanceof Error ? err.message : 'Unknown error'));
       } finally {
         setLoading(false);
@@ -49,7 +44,7 @@ const SearchResultsPage: React.FC = () => {
     };
 
     fetchJobs();
-  }, [location, licenseType, travel, endorsement]); 
+  }, [location, licenseType, travel, endorsement]);
 
   if (loading) {
     return (
@@ -69,7 +64,7 @@ const SearchResultsPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}  style={{ textAlign: 'center' }}>Search Results</h1>
+      <h1 className={styles.header} style={{ textAlign: 'center' }}>Search Results</h1>
       {filteredJobs.length > 0 ? (
         <ul className={styles.jobList}>
           {filteredJobs.map((item) => (
@@ -81,12 +76,9 @@ const SearchResultsPage: React.FC = () => {
                 {Array.isArray(item.endorsements) ? item.endorsements.join(', ') : item.endorsements}
               </p>
               <p><strong>Travel: </strong>{item.travel}</p>
-              <button
-                className={styles.button}
-                onClick={() => router.push(`/jobdetails/${item.id}`)}
-              >
+              <Link href={`/jobdetails?id=${item.id}`} className={styles.jobButton}>
                 View Full Job Listing
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
